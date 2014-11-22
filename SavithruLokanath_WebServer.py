@@ -8,7 +8,7 @@ import os
 import os.path
  
 host = ''                                              #Defines the ip adress of the host
-port = 960
+port = 9600
                                                        #Defines the port number
 size = 1024                                            #Defines the size of the blocks that the host can accept
 
@@ -39,9 +39,6 @@ def handler(client,address):
             #print t
             #print t[0]
             #print t[1]
-            
-            config = {}                                     #Defining a dictionary with predefined values
-            execfile('ws.conf',config)                      #Fetch the port number from the configure file
 
 #ERROR HANDLING IN THE URL RECEIVED            
 
