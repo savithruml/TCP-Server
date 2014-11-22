@@ -1,7 +1,7 @@
 *****HTTP Web Server Implementation Using Sockets*****
 
 import socket
-from socket import *                                              #Import libraries
+from socket import *                                   #Import libraries
 import thread
 from time import ctime
 import os
@@ -21,10 +21,10 @@ def handler(client,address):
     while 1:
         data = client.recv(size)                                   
         print 'data:' + repr(data)
-        a,b,c = data.split(" ")[0:3]                               #Splitting the request & storing in 'a,b,c' variables 
-        print a
-        print b
-        print c
+        a,b,c = data.split(" ")[0:3]                   #Splitting the request & storing in 'a,b,c' variables 
+        #print a
+        #print b
+        #print c
 
  #ERROR HANDLING THE REQUESTS
 
@@ -36,16 +36,16 @@ def handler(client,address):
         else:
 
             t = b.split(".")                                #Splitting the URL & storing it in variable 't'
-            print t
-            print t[0]
-            print t[1]
+            #print t
+            #print t[0]
+            #print t[1]
             
             config = {}                                     #Defining a dictionary with predefined values
-            execfile('ws.conf',config)
+            execfile('ws.conf',config)                      #Fetch the port number from the configure file
 
 #ERROR HANDLING IN THE URL RECEIVED            
 
-            if t[1] not in config['format']:                 #Check File Format
+            if t[1] not in config['format']:                #Check File Format
                 client.send('HTTP/1.1 501 OK\n Content-Type: text/html \n\n <HTML> <h1> 501 : File Type Not Supported</h1> </HTML>') 
                 break
             
@@ -53,7 +53,7 @@ def handler(client,address):
             req = bb[1]
             print req + 'xxx'                                                                
 
-            if '*' in req:                                   #Check URL contains any Special Characters like '*' '$' and send errors            
+            if '*' in req:                                  #Check URL contains any Special Characters like '*' '$' and send errors            
                 client.send('HTTP/1.1 400 OK\n Content-Type: text/html \n\n <HTML> <h1> Invalid URL</h1> </HTML>')
                 break
             if '%' in req:
@@ -88,7 +88,7 @@ def handler(client,address):
                     client.send('HTTP 1.0 200 OK\nContent-Type: text/html \n\n' + image_data)
                     exit
             
-        if not data:break                     #If no data received from the client then close the socket
+        if not data:break                                  #If no data received from the client then close the socket
         client.close()
 
     else:
@@ -100,7 +100,7 @@ if __name__=='__main__':
     ADDR = (host, port)
     s = socket(AF_INET, SOCK_STREAM)                   
     s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-    s.bind(ADDR)                                        #Binds the socket (server to the client) & establishes connection
+    s.bind(ADDR)                                           #Binds the socket (server to the client) & establishes connection
     s.listen(5)                                     
     while 1:
         print 'Awaiting connection'
